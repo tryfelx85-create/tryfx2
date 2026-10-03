@@ -1,0 +1,27 @@
+name: TryFXTheBot
+version: '${project.version}'
+main: com.tryfx.pvpbot.TryFXTheBot
+api-version: '1.21'
+description: Configurable PvP training bot with realistic combat AI, plus a dedicated training dimension
+author: TryFX
+
+load: POSTWORLD
+depend: [Citizens]
+
+commands:
+  training:
+    description: Teleport to/from the PvP training dimension
+    usage: /training
+    permission: tryfxbot.training
+  trainingbot:
+    description: Spawn/manage the TryFXTheBot training dummy
+    usage: /trainingbot <spawn|remove|difficulty|config> [args]
+    permission: tryfxbot.spawn
+
+permissions:
+  tryfxbot.training:
+    description: Allows entering the training dimension
+    default: true
+  tryfxbot.spawn:
+    description: Allows spawning and configuring the training bot
+    default: op

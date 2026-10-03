@@ -1,0 +1,185 @@
+# TryFXTheBot Configuration
+#
+# Each difficulty preset below fully defines every tunable combat stat.
+# To make a custom scenario (e.g. "perfect aim but bad movement"), copy a
+# preset block, rename it, and edit individual values, then use
+# /trainingbot spawn <yourpresetname>.
+#
+# All "chance" values are 0.0-1.0 (probability per decision tick).
+# All "ticks" values are in Minecraft ticks (20 ticks = 1 second).
+
+bot:
+  name: "TryFXTheBot"
+  skin-url: "https://namemc.com/skin/34ee7b40657bf72d"
+  default-kit: "sword"
+
+# Combat distance the bot tries to maintain (blocks)
+distance:
+  preferred-min: 2.5
+  preferred-max: 3.2
+
+presets:
+
+  EASY:
+    # Reaction / decision timing
+    reaction-delay-ticks: 8          # ticks between "noticing" a change and reacting
+    decision-interval-ticks: 6       # how often the AI re-evaluates state
+
+    # Aim
+    aim-turn-speed-deg-per-tick: 8.0 # max rotation per tick (yaw/pitch)
+    aim-error-degrees: 12.0          # random aim offset magnitude
+    aim-error-chance: 0.35           # chance of applying an aim error this decision
+
+    # Attack timing
+    attack-timing-jitter-ticks: 4    # randomness added to swing timing
+    miss-chance: 0.20                # chance of swinging without being in valid range
+
+    # Movement
+    strafe-chance: 0.15              # chance per decision to strafe instead of direct approach
+    strafe-duration-ticks-min: 6
+    strafe-duration-ticks-max: 14
+    circle-strafe-chance: 0.05
+    direction-change-chance: 0.20
+
+    # Jump / crit
+    jump-chance: 0.08
+    crit-attempt-chance: 0.10        # chance the bot deliberately times a jump-crit
+    crit-success-chance: 0.40        # chance the timed crit actually lands as a crit
+
+    # Sprint reset / W-tap
+    sprint-reset-chance: 0.10
+
+    # Combo
+    combo-skill: 0.20                # 0-1, affects follow-up-hit timing precision
+
+    # Defensive / shield (inert without shield kit, but values still apply if kit changes)
+    block-reaction-chance: 0.15
+    block-reaction-delay-ticks: 10
+
+    # Healing / item usage
+    heal-health-threshold: 0.30      # fraction of max health to trigger healing attempt
+    heal-decision-quality: 0.30      # 0-1, chance of making the "correct" healing decision
+    item-use-mistake-chance: 0.25    # chance of a suboptimal item-use decision
+
+    # Humanization
+    humanization-jitter: 0.35        # general randomness multiplier applied across behaviors
+
+    # Aggression (0=passive/defensive, 1=maximally aggressive)
+    aggression: 0.35
+
+  MEDIUM:
+    reaction-delay-ticks: 5
+    decision-interval-ticks: 4
+
+    aim-turn-speed-deg-per-tick: 14.0
+    aim-error-degrees: 6.0
+    aim-error-chance: 0.18
+
+    attack-timing-jitter-ticks: 2
+    miss-chance: 0.08
+
+    strafe-chance: 0.35
+    strafe-duration-ticks-min: 5
+    strafe-duration-ticks-max: 12
+    circle-strafe-chance: 0.15
+    direction-change-chance: 0.30
+
+    jump-chance: 0.12
+    crit-attempt-chance: 0.25
+    crit-success-chance: 0.65
+
+    sprint-reset-chance: 0.30
+
+    combo-skill: 0.50
+
+    block-reaction-chance: 0.40
+    block-reaction-delay-ticks: 6
+
+    heal-health-threshold: 0.40
+    heal-decision-quality: 0.60
+    item-use-mistake-chance: 0.12
+
+    humanization-jitter: 0.25
+
+    aggression: 0.55
+
+  HARD:
+    reaction-delay-ticks: 3
+    decision-interval-ticks: 2
+
+    aim-turn-speed-deg-per-tick: 22.0
+    aim-error-degrees: 3.0
+    aim-error-chance: 0.08
+
+    attack-timing-jitter-ticks: 1
+    miss-chance: 0.03
+
+    strafe-chance: 0.55
+    strafe-duration-ticks-min: 4
+    strafe-duration-ticks-max: 10
+    circle-strafe-chance: 0.30
+    direction-change-chance: 0.40
+
+    jump-chance: 0.16
+    crit-attempt-chance: 0.45
+    crit-success-chance: 0.85
+
+    sprint-reset-chance: 0.55
+
+    combo-skill: 0.75
+
+    block-reaction-chance: 0.65
+    block-reaction-delay-ticks: 3
+
+    heal-health-threshold: 0.45
+    heal-decision-quality: 0.80
+    item-use-mistake-chance: 0.05
+
+    humanization-jitter: 0.15
+
+    aggression: 0.70
+
+  IMPOSSIBLE:
+    reaction-delay-ticks: 1
+    decision-interval-ticks: 1
+
+    aim-turn-speed-deg-per-tick: 32.0
+    aim-error-degrees: 1.0
+    aim-error-chance: 0.03
+
+    attack-timing-jitter-ticks: 0
+    miss-chance: 0.01
+
+    strafe-chance: 0.70
+    strafe-duration-ticks-min: 3
+    strafe-duration-ticks-max: 8
+    circle-strafe-chance: 0.45
+    direction-change-chance: 0.50
+
+    jump-chance: 0.20
+    crit-attempt-chance: 0.65
+    crit-success-chance: 0.95
+
+    sprint-reset-chance: 0.80
+
+    combo-skill: 0.95
+
+    block-reaction-chance: 0.85
+    block-reaction-delay-ticks: 1
+
+    heal-health-threshold: 0.50
+    heal-decision-quality: 0.95
+    item-use-mistake-chance: 0.02
+
+    humanization-jitter: 0.08
+
+    aggression: 0.85
+
+messages:
+  prefix: "<dark_gray>[<aqua>Training<dark_gray>] "
+  bot-spawned: "<green>Spawned TryFXTheBot (difficulty: %difficulty%)."
+  bot-removed: "<yellow>Removed TryFXTheBot."
+  bot-not-found: "<red>No active training bot found."
+  entered-training: "<green>Teleported to the training arena."
+  left-training: "<green>Returned from the training arena."
+  invalid-difficulty: "<red>Invalid difficulty. Choose: EASY, MEDIUM, HARD, IMPOSSIBLE."
